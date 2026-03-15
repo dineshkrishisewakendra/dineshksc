@@ -1,120 +1,121 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
+import { useState } from "react";
+import { Menu, X, Phone, Sprout } from "lucide-react";
+
+const navLinks = [
+    { label: "Home", href: "#home" },
+    { label: "Seeds", href: "#categories" },
+    { label: "Crop Protection", href: "#products" },
+    { label: "Equipment", href: "#categories" },
+    { label: "Contact", href: "#contact" },
+];
 
 export default function Navbar() {
-    const [isOpen, setIsOpen] = useState(false);
-    const [scrolled, setScrolled] = useState(false);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 20);
-        };
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
-
-    const navLinks = [
-        { name: "Home", href: "/" },
-        { name: "About", href: "/about" },
-        { name: "Academics", href: "/academics" },
-        { name: "Admissions", href: "/admissions" },
-        { name: "Contact", href: "/contact" },
-    ];
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     return (
-        <nav
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
-                    ? "glass shadow-lg py-2"
-                    : "bg-transparent py-4"
-                }`}
-        >
+        <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-green-100">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between h-16">
-                    {/* Logo */}
-                    <Link href="/" className="flex items-center gap-3 group">
-                        <div className="w-10 h-10 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-light)] rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
-                            <span className="text-white font-bold text-lg">B</span>
+                <div className="flex items-center justify-between h-16 sm:h-20">
+                    {/* Brand */}
+                    <a href="#home" className="flex items-center gap-2 sm:gap-3 shrink-0">
+                        <div className="w-9 h-9 sm:w-11 sm:h-11 bg-gradient-to-br from-green-600 to-green-800 rounded-xl flex items-center justify-center shadow-md">
+                            <Sprout className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                         </div>
-                        <div>
-                            <h1 className={`font-bold text-lg leading-tight transition-colors duration-300 ${scrolled ? 'text-[var(--color-primary)]' : 'text-white'}`}>
-                                Bright Horizons
+                        <div className="leading-tight">
+                            <h1 className="text-sm sm:text-lg font-extrabold text-green-900 tracking-tight">
+                                Dinesh Krishi Seva
                             </h1>
-                            <p className={`text-xs font-medium tracking-widest uppercase transition-colors duration-300 ${scrolled ? 'text-[var(--color-accent)]' : 'text-[var(--color-accent-light)]'}`}>
-                                Academy
+                            <p className="text-[10px] sm:text-xs text-green-700 font-medium -mt-0.5">
+                                Kendra
                             </p>
                         </div>
-                    </Link>
+                    </a>
 
-                    {/* Desktop Nav */}
-                    <div className="hidden md:flex items-center gap-1">
+                    {/* Desktop Navigation */}
+                    <nav className="hidden lg:flex items-center gap-1">
                         {navLinks.map((link) => (
-                            <Link
-                                key={link.name}
+                            <a
+                                key={link.label}
                                 href={link.href}
-                                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:bg-white/20 ${scrolled
-                                        ? "text-[var(--color-text-primary)] hover:text-[var(--color-primary)]"
-                                        : "text-white/90 hover:text-white"
-                                    }`}
+                                className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-green-700 hover:bg-green-50 rounded-lg transition-all duration-200"
                             >
-                                {link.name}
-                            </Link>
+                                {link.label}
+                            </a>
                         ))}
-                        <Link
-                            href="/admissions"
-                            className="ml-4 btn-accent text-sm inline-flex items-center gap-2"
+                    </nav>
+
+                    {/* CTA Buttons */}
+                    <div className="hidden sm:flex items-center gap-3">
+                        <a
+                            href="tel:+919390057273"
+                            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-green-800 border border-green-300 hover:bg-green-50 rounded-xl transition-all duration-200"
                         >
-                            <span>Student Portal</span>
-                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                            <Phone className="w-4 h-4" />
+                            <span className="hidden md:inline">Call Us</span>
+                        </a>
+                        <a
+                            href="https://wa.me/918302619199?text=Hi%2C%20I%20want%20to%20place%20an%20order"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-whatsapp hover:bg-whatsapp-dark rounded-xl shadow-md hover:shadow-lg transition-all duration-200"
+                        >
+                            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
                             </svg>
-                        </Link>
+                            Order Now
+                        </a>
                     </div>
 
                     {/* Mobile Menu Button */}
                     <button
-                        onClick={() => setIsOpen(!isOpen)}
-                        className={`md:hidden p-2 rounded-lg transition-colors ${scrolled ? "text-[var(--color-primary)]" : "text-white"
-                            }`}
+                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                        className="lg:hidden p-2 text-gray-700 hover:text-green-700 hover:bg-green-50 rounded-lg transition-all"
                         aria-label="Toggle menu"
                     >
-                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            {isOpen ? (
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                            ) : (
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                            )}
-                        </svg>
+                        {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                     </button>
                 </div>
-
-                {/* Mobile Menu */}
-                <div
-                    className={`md:hidden transition-all duration-500 ease-in-out overflow-hidden ${isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-                        }`}
-                >
-                    <div className="glass rounded-2xl mt-2 p-4 space-y-1 shadow-xl">
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.name}
-                                href={link.href}
-                                onClick={() => setIsOpen(false)}
-                                className="block px-4 py-3 rounded-xl text-[var(--color-text-primary)] font-medium hover:bg-[var(--color-primary)]/10 hover:text-[var(--color-primary)] transition-all duration-300"
-                            >
-                                {link.name}
-                            </Link>
-                        ))}
-                        <Link
-                            href="/admissions"
-                            onClick={() => setIsOpen(false)}
-                            className="block text-center btn-accent mt-3"
-                        >
-                            Student Portal
-                        </Link>
-                    </div>
-                </div>
             </div>
-        </nav>
+
+            {/* Mobile Menu */}
+            {mobileMenuOpen && (
+                <div className="lg:hidden bg-white border-t border-green-100 shadow-lg">
+                    <nav className="px-4 py-3 space-y-1">
+                        {navLinks.map((link) => (
+                            <a
+                                key={link.label}
+                                href={link.href}
+                                onClick={() => setMobileMenuOpen(false)}
+                                className="block px-4 py-3 text-base font-medium text-gray-700 hover:text-green-700 hover:bg-green-50 rounded-xl transition-all"
+                            >
+                                {link.label}
+                            </a>
+                        ))}
+                        <div className="pt-3 border-t border-green-100 space-y-2">
+                            <a
+                                href="tel:+919390057273"
+                                className="flex items-center justify-center gap-2 w-full px-4 py-3 text-sm font-medium text-green-800 border border-green-300 hover:bg-green-50 rounded-xl transition-all"
+                            >
+                                <Phone className="w-4 h-4" />
+                                Call: +91 9390057273
+                            </a>
+                            <a
+                                href="https://wa.me/918302619199?text=Hi%2C%20I%20want%20to%20place%20an%20order"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center justify-center gap-2 w-full px-4 py-3 text-sm font-semibold text-white bg-whatsapp hover:bg-whatsapp-dark rounded-xl shadow-md transition-all"
+                            >
+                                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                                </svg>
+                                Order on WhatsApp
+                            </a>
+                        </div>
+                    </nav>
+                </div>
+            )}
+        </header>
     );
 }

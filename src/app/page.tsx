@@ -1,23 +1,23 @@
-import HeroSection from "@/components/sections/HeroSection";
-import StatsSection from "@/components/sections/StatsSection";
-import AboutPreview from "@/components/sections/AboutPreview";
-import ProgramsSection from "@/components/sections/ProgramsSection";
-import EventsSection from "@/components/sections/EventsSection";
-import PrincipalSection from "@/components/sections/PrincipalSection";
-import TestimonialsSection from "@/components/sections/TestimonialsSection";
-import CTASection from "@/components/sections/CTASection";
+import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import ProductCategories from "@/components/ProductCategories";
+import FeaturedProducts from "@/components/FeaturedProducts";
+import AboutTrust from "@/components/AboutTrust";
+import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
     <>
-      <HeroSection />
-      <StatsSection />
-      <AboutPreview />
-      <ProgramsSection />
-      <EventsSection />
-      <PrincipalSection />
-      <TestimonialsSection />
-      <CTASection />
+      <Navbar />
+      <main>
+        <Hero />
+        <ProductCategories />
+        <FeaturedProducts />
+        <AboutTrust />
+        <Contact />
+      </main>
+      <Footer />
     </>
   );
 }
