@@ -10,7 +10,7 @@ export default function Contact() {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        const text = `Hi, I'm *${name || "a customer"}*%0APhone: ${phone || "Not provided"}%0A%0A${message || "I want to know more about your products."}`;
+        const text = `Hi, I'm *${name || "a customer"}*\nPhone: ${phone || "Not provided"}\n\n${message || "I want to know more about your products."}`;
         window.open(`https://wa.me/918302619199?text=${encodeURIComponent(text)}`, "_blank");
     };
 
